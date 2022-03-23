@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Arrays</title>
+</head>
+<body>
+    <p><em>Please check the JavaScript Console to see the codes</em></p>
+
+    <script type="text/javascript" language="javascript">
+
+        //Data
+
+
+        var leaders = [
+            { firstName: 'Mustafa Kemal', lastName: 'Atatürk', year: 1881, passed: 1938 },
+            { firstName: 'Napoleon', lastName: 'Bonaparte', year: 1769, passed: 1821 },
+            { firstName: 'Winston', lastName: 'Churchill', year: 1874, passed: 1965 },
+            { firstName: 'Abraham', lastName: 'Lincoln', year: 1809, passed: 1865 },
+            { firstName: 'George', lastName: 'Washington', year: 1732, passed: 1799 },
+            { firstName: 'Che', lastName: 'Guevara', year:1928, passed: 1967 },
+            { firstName: 'Genghis', lastName: 'Khan', year: 1162, passed: 1227},
+            { firstName: 'Adolf', lastName: 'Hitler', year: 1889, passed: 1945 },
+            { firstName: 'Emir', lastName: 'Timur', year: 1336, passed: 1405 },
+            { firstName: 'Fidel', lastName: 'Castro', year: 1926, passed: 2016 },
+            { firstName: 'Marthin Luter', lastName: 'King', year: 1929, passed: 1968 },
+            { firstName: 'Vladimir', lastName: 'Lenin', year: 1870, passed: 1924 },
+        ];
+
+        var people = [
+            'McGwar, Tim', 'Douglass, Frederick', 'Roosevelt, Theodore', 'Cameron, James', 'Reagan, Ronald', 'Williams, Serena', 'Dickens, Charles', 'King, Stephen',
+            'Orwell, George', 'Woolf, Virginia', 'Steinbeck, John', 'Dostoyevski, Fyodor', 'Doyle, Arthur Conan', 'Shakespeare, William', 'Kafka, Franz', 'London, Jack',
+            'Messi, Lionel', 'Ronaldo, Cristiano', 'Mbappé, Kylian', 'Salah, Muhammed', 'Maradona, Diego', 'Lewandowski, Robert', 'Kane, Harry', 'Tyler, Steven', 'Nicks, Stevie',
+            'Cobain, Kurt', 'Burke, Solomon', 'Marley, Bob', 'Raitt, Bonnie', 'Hathaway, Donny', 'Morrison, Jim', 'Berry, Chuck', 'John, Elton', 'Young, Neil', 'Houston, Whitney',
+            'Simone, Nina', 'Jackson, Michael', 'Bowie, David', 'Mercury, Freddie', 'Green, Al', 'Presley, Elvis'
+        ];
+
+        //Array.protoype.filter()
+        //1. Filter the list of leaders who born in the 1800's
+
+        var eightteen = leaders.filter(leader => (leader.year >= 1800 && leader.year < 1900))
+        console.log(eightteen);
+
+        //Array.prototype.map()
+        //2. Array of the leaders' full names
+
+        var fullNames = leaders.map(leader => `${leader.firstName} ${leader.lastName}`);
+        console.log(fullNames);
+
+        //Array.protoype.sort()
+        //3. Sort the leaders by birthdate, oldest to youngest
+
+        var organized = leaders.sort((a, b) => a.year > b.year ? 1 : -1);
+        console.table(organized);
+
+        //Array.protoype.reduce()
+        //4. Number of days the all leaders live
+
+        var totalYears = leaders.reduce((total, leader) => {
+            return total + (leader.passed - leader.year);
+        }, 0);
+        console.log(totalYears);
+
+        //5. Sort the leaders by years lived
+
+        var oldest = leaders.sort(function (a, b) {
+            var lastLeader = a.passed - a.year;
+            var nextLeader = b.passed - b.year;
+            return lastLeader > nextLeader ? -1 : 1;
+        });
+        console.log(oldest);
+
+
+        //6. sort exercise
+        //sort the people alphabetically by last name
+
+        var alpha = people.sort((lastOne, nextOne) => {
+            var [aLast, aFirst] = lastOne.split(', ');
+            var [bLast, bFirst] = nextOne.split(', ');
+            return aLast > bLast ? 1 : -1;
+        });
+        console.log(alpha);
+
+        //7. Reduce Exercise
+        //Sum up the instances of each of these 
+
+        var data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'car', 'truck', 'pogostick'];
+
+        var transportation = data.reduce(function (obj, item) {
+            if(!obj[item]){
+                obj[item] = 0;
+            }
+            obj[item]++;
+            return obj;
+        }, {});
+        console.log(transportation);
+
+        
+    </script>
+</body>
+</html>
